@@ -60,7 +60,7 @@ resource "proxmox_vm_qemu" "talos-workers" {
 
     # VM Cloud-Init Settings
     os_type = "cloud-init"
-    cloudinit_cdrom_storage = "local-lvm"
+    cloudinit_cdrom_storage = var.nodes[count.index].node_disk_storage
     ipconfig0 = var.nodes[count.index].node_ipconfig
 }
 
