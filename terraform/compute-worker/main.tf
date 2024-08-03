@@ -36,6 +36,13 @@ resource "proxmox_vm_qemu" "talos-workers" {
     # VM Disk Settings
     scsihw = "virtio-scsi-single"
     disks {
+        ide {
+            ide0 {
+                cloudinit {
+                    storage = var.nodes[count.index].node_disk_storage
+                }
+            }
+        }
         scsi {
             scsi0 {
                 disk {
@@ -60,7 +67,6 @@ resource "proxmox_vm_qemu" "talos-workers" {
 
     # VM Cloud-Init Settings
     os_type = "cloud-init"
-    cloudinit_cdrom_storage = var.nodes[count.index].node_disk_storage
     ipconfig0 = var.nodes[count.index].node_ipconfig
 }
 
