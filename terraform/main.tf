@@ -1,19 +1,21 @@
 # Dynamically create VMs.
 module "compute_master" {
-  source                   = "./compute-master"
-  proxmox_api_url          = var.proxmox_api_url
-  proxmox_api_token_id     = var.proxmox_api_token_id
-  proxmox_api_token_secret = var.proxmox_api_token_secret
-  proxmox_node             = var.proxmox_node
-  nodes                    = local.vm_master_nodes
+  source                     = "./compute-master"
+  proxmox_api_url            = var.proxmox_api_url
+  proxmox_api_token_id       = var.proxmox_api_token_id
+  proxmox_api_token_secret   = var.proxmox_api_token_secret
+  proxmox_node               = var.proxmox_node
+  proxmox_parallel_processes = var.proxmox_parallel_processes
+  nodes                      = local.vm_master_nodes
 }
 module "compute_worker" {
-  source                   = "./compute-worker"
-  proxmox_api_url          = var.proxmox_api_url
-  proxmox_api_token_id     = var.proxmox_api_token_id
-  proxmox_api_token_secret = var.proxmox_api_token_secret
-  proxmox_node             = var.proxmox_node
-  nodes                    = local.vm_worker_nodes
+  source                     = "./compute-worker"
+  proxmox_api_url            = var.proxmox_api_url
+  proxmox_api_token_id       = var.proxmox_api_token_id
+  proxmox_api_token_secret   = var.proxmox_api_token_secret
+  proxmox_node               = var.proxmox_node
+  proxmox_parallel_processes = var.proxmox_parallel_processes
+  nodes                      = local.vm_worker_nodes
 }
 
 output "master_mac_addrs" {
